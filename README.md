@@ -30,3 +30,6 @@ File	Description
 $ helm repo add adityagajbhiye18-wikimedia https://github.com/adityagajbhiye18/wikimedia/tree/main/charts/wikimedia
 
 $ helm install my-release adityagajbhiye18/wikimedia 
+
+
+Note: Please enter the database details while setting up mediawiki.
