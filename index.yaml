@@ -3,7 +3,7 @@ entries:
   wikimedia:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-05-07T19:26:24.861116+05:30"
+    created: "2023-05-07T20:32:05.004961+05:30"
     dependencies:
     - alias: postgresql
       condition: postgresql.enabled
@@ -11,10 +11,10 @@ entries:
       repository: https://charts.bitnami.com/bitnami
       version: 11.x.x
     description: A Helm chart for Kubernetes
-    digest: 70b9a77229df43dd7a06696a459061d0d3fa24afbf986085f1bfbfe7a6a23a87
+    digest: 23fa33a2d6b8e2ff6c706b7ff310c98818a266cf4d2af9421869c502533763b4
     name: wikimedia
     type: application
     urls:
     - https://adityagajbhiye18.github.io/wikimedia/wikimedia-1.0.0.tgz
     version: 1.0.0
-generated: "2023-05-07T19:26:24.856423+05:30"
+generated: "2023-05-07T20:32:04.999598+05:30"
