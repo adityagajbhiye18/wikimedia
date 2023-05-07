@@ -1,0 +1,108 @@
+# Default values for wikimedia.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: adgajbhi/wikimedia
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+    # -- Type of service
+  type: ClusterIP
+    # -- Port details for sevice
+  port: 80
+  # -- Container Port details for sevice
+  portContainer: 80
+
+
+
+ingress:
+    # -- If you want to enable or disable the ingress
+  enabled: true
+    # -- a reference to an Ingress Class resource that contains additional configuration including the name of the controller that should implement the class
+  className: nginx
+    # -- Annotations to add to the ingress
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    # -- Host of the application on which application runs
+  host: ""
+  tls: 
+     enabled: false   
+     secretName: ""
+      # -- If present overwrites the default secret name
+    certManager:
+      # -- If preset enables certificate generation via cert-manager namespace scoped issuer
+      #issuer: ""
+      # -- If preset enables certificate generation via cert-manager cluster-wide issuer
+      clusterIssuer: "letsencrypt-prod"
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+postgresql:  
+  # -- PostgreSQL chart configuration
+  # Switch to enable or disable the PostgreSQL helm chart
+  enabled: true
+  fullnameOverride: "wikimedia-postgres"
+  auth:
+   username: "wikituser"
+   port: 5432
+   database: "wikidb"
+   existingSecret: "postgresql-secrets"
+   secretKeys:
+    adminPasswordKey: "postgres-password"
+    userPasswordKey: "password"
