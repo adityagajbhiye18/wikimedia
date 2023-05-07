@@ -12,6 +12,8 @@ image:
 
 imagePullSecrets: []
 
+portContainer: 80
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
@@ -55,7 +57,7 @@ ingress:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/affinity: "cookie"
     # -- Host of the application on which application runs
-  host: ""
+  host: "mediawiki"
   tls: 
      enabled: false   
      secretName: ""
